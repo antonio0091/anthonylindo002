@@ -1,25 +1,201 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Filmes Pornográficos</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meu Site de Filmes</title>
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background-color: #141414;
+        color: #fff;
+    }
+
+    header {
+        background-color: #1f1f1f;
+        padding: 20px;
+        text-align: center;
+    }
+
+    header h1 {
+        font-size: 2em;
+        margin-bottom: 5px;
+    }
+
+    header p {
+        font-size: 1em;
+        color: #bbb;
+    }
+
+    main {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+        padding: 20px;
+    }
+
+    .movie-card {
+        position: relative;
+        cursor: pointer;
+        overflow: hidden;
+        border-radius: 10px;
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .movie-card img {
+        width: 100%;
+        display: block;
+        border-radius: 10px;
+        transition: transform 0.3s;
+    }
+
+    .movie-card:hover img {
+        transform: scale(1.05);
+    }
+
+    .movie-title {
+        position: absolute;
+        bottom: 0;
+        background: rgba(0,0,0,0.7);
+        width: 100%;
+        text-align: center;
+        padding: 10px;
+        font-size: 1em;
+        transition: background 0.3s;
+    }
+
+    .movie-card:hover .movie-title {
+        background: rgba(0,0,0,0.9);
+    }
+
+    /* Modal */
+    .modal {
+        display: none;
+        position: fixed;
+        top:0;
+        left:0;
+        width:100%;
+        height:100%;
+        background: rgba(0,0,0,0.8);
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+    }
+
+    .modal-content {
+        position: relative;
+        width: 80%;
+        max-width: 800px;
+    }
+
+    .modal video {
+        width: 100%;
+        border-radius: 10px;
+    }
+
+    .close-modal {
+        position: absolute;
+        top: -20px;
+        right: -20px;
+        background: #ff0000;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        text-align: center;
+        line-height: 40px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    footer {
+        text-align: center;
+        padding: 10px;
+        background-color: #1f1f1f;
+        color: #bbb;
+    }
+
+    @media (max-width: 600px) {
+        .modal-content {
+            width: 95%;
+        }
+    }
+</style>
 </head>
 <body>
-    <header>
-        <h1>Meu Site de Filmes Pornogr´fico</h1>
-        <p>Assista aos seus filmes porno favoritos diretamente aqui!</p>
-    </header>
+<header>
+    <h1>Meu Site de Filmes</h1>
+    <p>Clique no cartaz para assistir!</p>
+</header>
 
-    <main id="movieList">
-        <!-- Os filmes serão adicionados dinamicamente pelo script.js -->
-    </main>
+<main id="movieList">
+    <!-- Cartazes adicionados dinamicamente -->
+</main>
 
-    <footer>
-        <p>© 2026 Meu Nome</p>
-    </footer>
+<!-- Modal -->
+<div id="modal" class="modal">
+    <div class="modal-content">
+        <span class="close-modal" id="closeModal">&times;</span>
+        <video controls id="modalVideo">
+            <source src="" type="video/mp4">
+            Seu navegador não suporta vídeo.
+        </video>
+    </div>
+</div>
 
-    <script src="script.js"></script>
+<footer>
+    © 2026 Meu Nome
+</footer>
+
+<script>
+const movies = [
+    {
+        title: "Filme 1",
+        poster: "videos/filme1.jpg", // cartaz do filme
+        video: "videos/filme1.mp4"
+    },
+    {
+        title: "Filme 2",
+        poster: "videos/filme2.jpg",
+        video: "videos/filme2.mp4"
+    },
+    // Adicione mais filmes aqui
+];
+
+const movieList = document.getElementById('movieList');
+const modal = document.getElementById('modal');
+const modalVideo = document.getElementById('modalVideo');
+const closeModal = document.getElementById('closeModal');
+
+movies.forEach(movie => {
+    const card = document.createElement('div');
+    card.classList.add('movie-card');
+    card.innerHTML = `
+        <img src="${movie.poster}" alt="${movie.title}">
+        <div class="movie-title">${movie.title}</div>
+    `;
+    card.addEventListener('click', () => {
+        modalVideo.src = movie.video;
+        modal.style.display = 'flex';
+        modalVideo.play();
+    });
+    movieList.appendChild(card);
+});
+
+closeModal.addEventListener('click', () => {
+    modalVideo.pause();
+    modalVideo.src = "";
+    modal.style.display = 'none';
+});
+
+// Fechar modal ao clicar fora do vídeo
+modal.addEventListener('click', e => {
+    if(e.target === modal){
+        modalVideo.pause();
+        modalVideo.src = "";
+        modal.style.display = 'none';
+    }
+});
+</script>
 </body>
 </html>
