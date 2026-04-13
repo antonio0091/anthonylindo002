@@ -3,136 +3,212 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Meu Site de Filmes</title>
+<title>Site de Filmes com Abas</title>
 <style>
-    body {
-        margin: 0;
-        font-family: Arial, sans-serif;
-        background-color: #141414;
-        color: #fff;
-    }
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #141414;
+    color: #fff;
+}
 
-    header {
-        background-color: #1f1f1f;
-        padding: 20px;
-        text-align: center;
-    }
+header {
+    background-color: #1f1f1f;
+    padding: 20px;
+    text-align: center;
+}
 
-    header h1 {
-        font-size: 2em;
-        margin-bottom: 5px;
-    }
+header h1 {
+    font-size: 2em;
+    margin-bottom: 5px;
+}
 
-    header p {
-        font-size: 1em;
-        color: #bbb;
-    }
+header p {
+    font-size: 1em;
+    color: #bbb;
+}
 
-    main {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 20px;
-        padding: 20px;
-    }
+/* Abas */
+.tabs {
+    display: flex;
+    justify-content: center;
+    background-color: #222;
+}
 
-    .movie-card {
-        position: relative;
-        cursor: pointer;
-        overflow: hidden;
-        border-radius: 10px;
-        transition: transform 0.3s, box-shadow 0.3s;
-    }
+.tab {
+    padding: 15px 25px;
+    cursor: pointer;
+    transition: background 0.3s;
+    color: #bbb;
+}
 
-    .movie-card img {
-        width: 100%;
-        display: block;
-        border-radius: 10px;
-        transition: transform 0.3s;
-    }
+.tab.active {
+    background-color: #4caf50;
+    color: #fff;
+}
 
-    .movie-card:hover img {
-        transform: scale(1.05);
-    }
+/* Conteúdo das abas */
+.tab-content {
+    display: none;
+    padding: 20px;
+}
 
-    .movie-title {
-        position: absolute;
-        bottom: 0;
-        background: rgba(0,0,0,0.7);
-        width: 100%;
-        text-align: center;
-        padding: 10px;
-        font-size: 1em;
-        transition: background 0.3s;
-    }
+.tab-content.active {
+    display: block;
+}
 
-    .movie-card:hover .movie-title {
-        background: rgba(0,0,0,0.9);
-    }
+/* Grid de filmes */
+.movie-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
 
-    /* Modal */
-    .modal {
-        display: none;
-        position: fixed;
-        top:0;
-        left:0;
-        width:100%;
-        height:100%;
-        background: rgba(0,0,0,0.8);
-        justify-content: center;
-        align-items: center;
-        z-index: 1000;
-    }
+.movie-card {
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+    border-radius: 10px;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
 
-    .modal-content {
-        position: relative;
-        width: 80%;
-        max-width: 800px;
-    }
+.movie-card img {
+    width: 100%;
+    display: block;
+    border-radius: 10px;
+    transition: transform 0.3s;
+}
 
-    .modal video {
-        width: 100%;
-        border-radius: 10px;
-    }
+.movie-card:hover img {
+    transform: scale(1.05);
+}
 
-    .close-modal {
-        position: absolute;
-        top: -20px;
-        right: -20px;
-        background: #ff0000;
-        border-radius: 50%;
-        width: 40px;
-        height: 40px;
-        text-align: center;
-        line-height: 40px;
-        font-weight: bold;
-        cursor: pointer;
-    }
+.movie-title {
+    position: absolute;
+    bottom: 0;
+    background: rgba(0,0,0,0.7);
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+    font-size: 1em;
+}
 
-    footer {
-        text-align: center;
-        padding: 10px;
-        background-color: #1f1f1f;
-        color: #bbb;
-    }
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background: rgba(0,0,0,0.8);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
 
-    @media (max-width: 600px) {
-        .modal-content {
-            width: 95%;
-        }
-    }
+.modal-content {
+    position: relative;
+    width: 80%;
+    max-width: 800px;
+}
+
+.modal video {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.close-modal {
+    position: absolute;
+    top: -20px;
+    right: -20px;
+    background: #ff0000;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* Formulários */
+form {
+    display: flex;
+    flex-direction: column;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+form input, form textarea {
+    margin-bottom: 15px;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+}
+
+form button {
+    padding: 10px;
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+form button:hover {
+    background-color: #45a049;
+}
+
+footer {
+    text-align: center;
+    padding: 10px;
+    background-color: #1f1f1f;
+    color: #bbb;
+}
+
 </style>
 </head>
 <body>
+
 <header>
-    <h1>Meu Site de Filmes</h1>
-    <p>Clique no cartaz para assistir!</p>
+    <h1>Site de Filmes</h1>
+    <p>Escolha uma aba para navegar</p>
 </header>
 
-<main id="movieList">
-    <!-- Cartazes adicionados dinamicamente -->
-</main>
+<!-- Abas -->
+<div class="tabs">
+    <div class="tab active" data-tab="inicio">Início</div>
+    <div class="tab" data-tab="add">Adicionar Vídeos</div>
+    <div class="tab" data-tab="feedback">Feedback</div>
+</div>
 
-<!-- Modal -->
+<!-- Conteúdo das abas -->
+<div class="tab-content active" id="inicio">
+    <div class="movie-grid" id="movieList">
+        <!-- Filmes serão adicionados aqui -->
+    </div>
+</div>
+
+<div class="tab-content" id="add">
+    <h2>Adicionar Novo Filme</h2>
+    <form id="addMovieForm">
+        <input type="text" id="movieTitle" placeholder="Título do Filme" required>
+        <input type="text" id="moviePoster" placeholder="Caminho do Cartaz (ex: videos/filme3.jpg)" required>
+        <input type="text" id="movieVideo" placeholder="Caminho do Vídeo (ex: videos/filme3.mp4)" required>
+        <button type="submit">Adicionar Filme</button>
+    </form>
+</div>
+
+<div class="tab-content" id="feedback">
+    <h2>Envie seu Feedback</h2>
+    <form id="feedbackForm">
+        <input type="text" placeholder="Seu Nome" required>
+        <textarea placeholder="Seu Feedback" rows="5" required></textarea>
+        <button type="submit">Enviar</button>
+    </form>
+</div>
+
+<!-- Modal para vídeo -->
 <div id="modal" class="modal">
     <div class="modal-content">
         <span class="close-modal" id="closeModal">&times;</span>
@@ -148,18 +224,26 @@
 </footer>
 
 <script>
-const movies = [
-    {
-        title: "Filme 1",
-        poster: "videos/filme1.jpg", // cartaz do filme
-        video: "videos/filme1.mp4"
-    },
-    {
-        title: "Filme 2",
-        poster: "videos/filme2.jpg",
-        video: "videos/filme2.mp4"
-    },
-    // Adicione mais filmes aqui
+// Abas
+const tabs = document.querySelectorAll('.tab');
+const tabContents = document.querySelectorAll('.tab-content');
+
+tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+        tabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+
+        tabContents.forEach(content => {
+            content.classList.remove('active');
+        });
+        document.getElementById(tab.dataset.tab).classList.add('active');
+    });
+});
+
+// Filmes
+let movies = [
+    { title: "Filme 1", poster: "videos/filme1.jpg", video: "videos/filme1.mp4" },
+    { title: "Filme 2", poster: "videos/filme2.jpg", video: "videos/filme2.mp4" }
 ];
 
 const movieList = document.getElementById('movieList');
@@ -167,20 +251,25 @@ const modal = document.getElementById('modal');
 const modalVideo = document.getElementById('modalVideo');
 const closeModal = document.getElementById('closeModal');
 
-movies.forEach(movie => {
-    const card = document.createElement('div');
-    card.classList.add('movie-card');
-    card.innerHTML = `
-        <img src="${movie.poster}" alt="${movie.title}">
-        <div class="movie-title">${movie.title}</div>
-    `;
-    card.addEventListener('click', () => {
-        modalVideo.src = movie.video;
-        modal.style.display = 'flex';
-        modalVideo.play();
+function renderMovies() {
+    movieList.innerHTML = "";
+    movies.forEach(movie => {
+        const card = document.createElement('div');
+        card.classList.add('movie-card');
+        card.innerHTML = `
+            <img src="${movie.poster}" alt="${movie.title}">
+            <div class="movie-title">${movie.title}</div>
+        `;
+        card.addEventListener('click', () => {
+            modalVideo.src = movie.video;
+            modal.style.display = 'flex';
+            modalVideo.play();
+        });
+        movieList.appendChild(card);
     });
-    movieList.appendChild(card);
-});
+}
+
+renderMovies();
 
 closeModal.addEventListener('click', () => {
     modalVideo.pause();
@@ -188,7 +277,6 @@ closeModal.addEventListener('click', () => {
     modal.style.display = 'none';
 });
 
-// Fechar modal ao clicar fora do vídeo
 modal.addEventListener('click', e => {
     if(e.target === modal){
         modalVideo.pause();
@@ -196,6 +284,29 @@ modal.addEventListener('click', e => {
         modal.style.display = 'none';
     }
 });
+
+// Adicionar filmes
+const addMovieForm = document.getElementById('addMovieForm');
+addMovieForm.addEventListener('submit', e => {
+    e.preventDefault();
+    const title = document.getElementById('movieTitle').value;
+    const poster = document.getElementById('moviePoster').value;
+    const video = document.getElementById('movieVideo').value;
+
+    movies.push({ title, poster, video });
+    renderMovies();
+    addMovieForm.reset();
+    alert("Filme adicionado! Confira na aba Início.");
+});
+
+// Feedback
+const feedbackForm = document.getElementById('feedbackForm');
+feedbackForm.addEventListener('submit', e => {
+    e.preventDefault();
+    alert("Obrigado pelo seu feedback!");
+    feedbackForm.reset();
+});
 </script>
+
 </body>
 </html>
