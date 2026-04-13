@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Site de Filmes com Abas</title>
+<title>Site de Filmes - Abas Vazias</title>
 <style>
 body {
     margin: 0;
@@ -57,42 +57,6 @@ header p {
     display: block;
 }
 
-/* Grid de filmes */
-.movie-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 20px;
-}
-
-.movie-card {
-    position: relative;
-    cursor: pointer;
-    overflow: hidden;
-    border-radius: 10px;
-    transition: transform 0.3s, box-shadow 0.3s;
-}
-
-.movie-card img {
-    width: 100%;
-    display: block;
-    border-radius: 10px;
-    transition: transform 0.3s;
-}
-
-.movie-card:hover img {
-    transform: scale(1.05);
-}
-
-.movie-title {
-    position: absolute;
-    bottom: 0;
-    background: rgba(0,0,0,0.7);
-    width: 100%;
-    text-align: center;
-    padding: 10px;
-    font-size: 1em;
-}
-
 /* Modal */
 .modal {
     display: none;
@@ -132,47 +96,19 @@ header p {
     cursor: pointer;
 }
 
-/* Formulários */
-form {
-    display: flex;
-    flex-direction: column;
-    max-width: 500px;
-    margin: 0 auto;
-}
-
-form input, form textarea {
-    margin-bottom: 15px;
-    padding: 10px;
-    border-radius: 5px;
-    border: none;
-}
-
-form button {
-    padding: 10px;
-    background-color: #4caf50;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-}
-
-form button:hover {
-    background-color: #45a049;
-}
-
 footer {
     text-align: center;
     padding: 10px;
     background-color: #1f1f1f;
     color: #bbb;
 }
-
 </style>
 </head>
 <body>
 
 <header>
     <h1>Site de Filmes</h1>
-    <p>Escolha uma aba para navegar</p>
+    <p>Navegue pelas abas</p>
 </header>
 
 <!-- Abas -->
@@ -182,33 +118,20 @@ footer {
     <div class="tab" data-tab="feedback">Feedback</div>
 </div>
 
-<!-- Conteúdo das abas -->
+<!-- Conteúdo das abas (vazio) -->
 <div class="tab-content active" id="inicio">
-    <div class="movie-grid" id="movieList">
-        <!-- Filmes serão adicionados aqui -->
-    </div>
+    <!-- Conteúdo removido -->
 </div>
 
 <div class="tab-content" id="add">
-    <h2>Adicionar Novo Filme</h2>
-    <form id="addMovieForm">
-        <input type="text" id="movieTitle" placeholder="Título do Filme" required>
-        <input type="text" id="moviePoster" placeholder="Caminho do Cartaz (ex: videos/filme3.jpg)" required>
-        <input type="text" id="movieVideo" placeholder="Caminho do Vídeo (ex: videos/filme3.mp4)" required>
-        <button type="submit">Adicionar Filme</button>
-    </form>
+    <!-- Conteúdo removido -->
 </div>
 
 <div class="tab-content" id="feedback">
-    <h2>Envie seu Feedback</h2>
-    <form id="feedbackForm">
-        <input type="text" placeholder="Seu Nome" required>
-        <textarea placeholder="Seu Feedback" rows="5" required></textarea>
-        <button type="submit">Enviar</button>
-    </form>
+    <!-- Conteúdo removido -->
 </div>
 
-<!-- Modal para vídeo -->
+<!-- Modal (mantido, mas vazio) -->
 <div id="modal" class="modal">
     <div class="modal-content">
         <span class="close-modal" id="closeModal">&times;</span>
@@ -224,7 +147,7 @@ footer {
 </footer>
 
 <script>
-// Abas
+// Função para trocar abas
 const tabs = document.querySelectorAll('.tab');
 const tabContents = document.querySelectorAll('.tab-content');
 
@@ -233,43 +156,15 @@ tabs.forEach(tab => {
         tabs.forEach(t => t.classList.remove('active'));
         tab.classList.add('active');
 
-        tabContents.forEach(content => {
-            content.classList.remove('active');
-        });
+        tabContents.forEach(content => content.classList.remove('active'));
         document.getElementById(tab.dataset.tab).classList.add('active');
     });
 });
 
-// Filmes
-let movies = [
-    { title: "Filme 1", poster: "videos/filme1.jpg", video: "videos/filme1.mp4" },
-    { title: "Filme 2", poster: "videos/filme2.jpg", video: "videos/filme2.mp4" }
-];
-
-const movieList = document.getElementById('movieList');
+// Modal vazio (mantido para futuro uso)
 const modal = document.getElementById('modal');
 const modalVideo = document.getElementById('modalVideo');
 const closeModal = document.getElementById('closeModal');
-
-function renderMovies() {
-    movieList.innerHTML = "";
-    movies.forEach(movie => {
-        const card = document.createElement('div');
-        card.classList.add('movie-card');
-        card.innerHTML = `
-            <img src="${movie.poster}" alt="${movie.title}">
-            <div class="movie-title">${movie.title}</div>
-        `;
-        card.addEventListener('click', () => {
-            modalVideo.src = movie.video;
-            modal.style.display = 'flex';
-            modalVideo.play();
-        });
-        movieList.appendChild(card);
-    });
-}
-
-renderMovies();
 
 closeModal.addEventListener('click', () => {
     modalVideo.pause();
@@ -283,28 +178,6 @@ modal.addEventListener('click', e => {
         modalVideo.src = "";
         modal.style.display = 'none';
     }
-});
-
-// Adicionar filmes
-const addMovieForm = document.getElementById('addMovieForm');
-addMovieForm.addEventListener('submit', e => {
-    e.preventDefault();
-    const title = document.getElementById('movieTitle').value;
-    const poster = document.getElementById('moviePoster').value;
-    const video = document.getElementById('movieVideo').value;
-
-    movies.push({ title, poster, video });
-    renderMovies();
-    addMovieForm.reset();
-    alert("Filme adicionado! Confira na aba Início.");
-});
-
-// Feedback
-const feedbackForm = document.getElementById('feedbackForm');
-feedbackForm.addEventListener('submit', e => {
-    e.preventDefault();
-    alert("Obrigado pelo seu feedback!");
-    feedbackForm.reset();
 });
 </script>
 
