@@ -22,6 +22,8 @@ header {
 header h1 {
     font-size: 2em;
     margin-bottom: 5px;
+    color: #ff1a1a;
+    text-shadow: 0 0 10px #ff1a1a, 0 0 20px #ff0000;
 }
 
 header p {
@@ -35,24 +37,54 @@ header p {
     justify-content: center;
     background-color: #222;
     padding: 10px 0;
+    gap: 10px;
 }
 
 .tab {
-    padding: 15px 25px;
+    padding: 12px 25px;
     cursor: pointer;
-    transition: 0.3s;
     color: #bbb;
+    border-radius: 8px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Borda neon animada */
+.tab::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 8px;
+    padding: 2px;
+    background: linear-gradient(120deg, transparent, #ff1a1a, transparent);
+    background-size: 200% 200%;
+    -webkit-mask: 
+        linear-gradient(#000 0 0) content-box, 
+        linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    animation: neonMove 3s linear infinite;
+}
+
+@keyframes neonMove {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 200% 50%; }
 }
 
 .tab:hover {
-    color: #ff1a1a;
-    text-shadow: 0 0 8px #ff1a1a;
+    color: #fff;
+    box-shadow: 0 0 10px #ff1a1a;
 }
 
+/* Aba ativa */
 .tab.active {
-    background-color: #ff1a1a;
     color: #fff;
-    box-shadow: 0 0 15px #ff1a1a;
+    transform: scale(1.08);
+}
+
+.tab.active::before {
+    background: linear-gradient(120deg, #ff1a1a, #ff0000, #ff1a1a);
+    box-shadow: 0 0 15px #ff1a1a, 0 0 25px #ff1a1a;
 }
 
 /* Conteúdo das abas */
@@ -112,7 +144,7 @@ footer {
     bottom: 10px;
     right: 15px;
     background: transparent;
-    color: rgba(255, 0, 0, 0.5);
+    color: rgba(255, 255, 255, 0.35);
     font-size: 0.9em;
     z-index: 1000;
     pointer-events: none;
@@ -126,14 +158,12 @@ footer {
     <p>Navegue pelas abas</p>
 </header>
 
-<!-- Abas -->
 <div class="tabs">
     <div class="tab active" data-tab="inicio">Início</div>
     <div class="tab" data-tab="add">Adicionar Vídeos</div>
     <div class="tab" data-tab="feedback">Feedback</div>
 </div>
 
-<!-- Conteúdo das abas -->
 <div class="tab-content active" id="inicio">
     <p>Bem-vindo ao Paraná Filmes! Aqui você verá os lançamentos e clássicos favoritos.</p>
 </div>
@@ -146,7 +176,6 @@ footer {
     <p>Deixe seu feedback sobre o site aqui.</p>
 </div>
 
-<!-- Modal -->
 <div id="modal" class="modal">
     <div class="modal-content">
         <span class="close-modal" id="closeModal">&times;</span>
@@ -162,7 +191,6 @@ footer {
 </footer>
 
 <script>
-// Função para trocar abas
 const tabs = document.querySelectorAll('.tab');
 const tabContents = document.querySelectorAll('.tab-content');
 
@@ -176,7 +204,6 @@ tabs.forEach(tab => {
     });
 });
 
-// Modal funcional
 const modal = document.getElementById('modal');
 const modalVideo = document.getElementById('modalVideo');
 const closeModal = document.getElementById('closeModal');
