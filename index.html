@@ -10,12 +10,12 @@ body {
     font-family: Arial, sans-serif;
     background-color: #141414;
     color: #fff;
-    padding-top: 10px; /* espaço no topo */
+    padding-top: 10px;
 }
 
 header {
     background-color: #1f1f1f;
-    padding: 30px 20px; /* mais espaço no header */
+    padding: 30px 20px;
     text-align: center;
 }
 
@@ -34,7 +34,7 @@ header p {
     display: flex;
     justify-content: center;
     background-color: #222;
-    padding: 10px 0; /* espaço vertical nas abas */
+    padding: 10px 0;
 }
 
 .tab {
@@ -52,8 +52,8 @@ header p {
 /* Conteúdo das abas */
 .tab-content {
     display: none;
-    padding: 40px 20px; /* mais espaço interno */
-    margin-top: 10px;   /* espaço entre abas e conteúdo */
+    padding: 40px 20px;
+    margin-top: 10px;
 }
 
 .tab-content.active {
@@ -99,11 +99,16 @@ header p {
     cursor: pointer;
 }
 
+/* Footer corrigido */
 footer {
-    text-align: center;
-    padding: 10px;
-    background-color: #1f1f1f;
-    color: #bbb;
+    position: fixed;
+    bottom: 10px;
+    right: 15px;
+    background: transparent;
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 0.9em;
+    z-index: 1000;
+    pointer-events: none;
 }
 </style>
 </head>
@@ -164,7 +169,7 @@ tabs.forEach(tab => {
     });
 });
 
-// Modal funcional (vazio por enquanto)
+// Modal funcional
 const modal = document.getElementById('modal');
 const modalVideo = document.getElementById('modalVideo');
 const closeModal = document.getElementById('closeModal');
