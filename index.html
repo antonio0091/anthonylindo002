@@ -3,18 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Site de Filmes - Abas Vazias</title>
+<title>Site de Filmes</title>
 <style>
 body {
     margin: 0;
     font-family: Arial, sans-serif;
     background-color: #141414;
     color: #fff;
+    padding-top: 10px; /* espaço no topo */
 }
 
 header {
     background-color: #1f1f1f;
-    padding: 20px;
+    padding: 30px 20px; /* mais espaço no header */
     text-align: center;
 }
 
@@ -33,6 +34,7 @@ header p {
     display: flex;
     justify-content: center;
     background-color: #222;
+    padding: 10px 0; /* espaço vertical nas abas */
 }
 
 .tab {
@@ -50,7 +52,8 @@ header p {
 /* Conteúdo das abas */
 .tab-content {
     display: none;
-    padding: 20px;
+    padding: 40px 20px; /* mais espaço interno */
+    margin-top: 10px;   /* espaço entre abas e conteúdo */
 }
 
 .tab-content.active {
@@ -118,20 +121,20 @@ footer {
     <div class="tab" data-tab="feedback">Feedback</div>
 </div>
 
-<!-- Conteúdo das abas (vazio) -->
+<!-- Conteúdo das abas -->
 <div class="tab-content active" id="inicio">
-    <!-- Conteúdo removido -->
+    <p>Bem-vindo ao site de filmes! Aqui você verá os lançamentos e clássicos favoritos.</p>
 </div>
 
 <div class="tab-content" id="add">
-    <!-- Conteúdo removido -->
+    <p>Aqui você poderá adicionar seus vídeos favoritos futuramente.</p>
 </div>
 
 <div class="tab-content" id="feedback">
-    <!-- Conteúdo removido -->
+    <p>Deixe seu feedback sobre o site aqui.</p>
 </div>
 
-<!-- Modal (mantido, mas vazio) -->
+<!-- Modal -->
 <div id="modal" class="modal">
     <div class="modal-content">
         <span class="close-modal" id="closeModal">&times;</span>
@@ -143,7 +146,7 @@ footer {
 </div>
 
 <footer>
-    © 2026 Meu Nome
+    © anthony_martims
 </footer>
 
 <script>
@@ -161,7 +164,7 @@ tabs.forEach(tab => {
     });
 });
 
-// Modal vazio (mantido para futuro uso)
+// Modal funcional (vazio por enquanto)
 const modal = document.getElementById('modal');
 const modalVideo = document.getElementById('modalVideo');
 const closeModal = document.getElementById('closeModal');
