@@ -20,10 +20,30 @@ header {
 }
 
 header h1 {
-    font-size: 2em;
+    font-size: 2.8em; /* maior */
     margin-bottom: 5px;
-    color: #ff1a1a;
-    text-shadow: 0 0 10px #ff1a1a, 0 0 20px #ff0000;
+    color: #ffffff;
+    position: relative;
+    overflow: hidden;
+}
+
+/* efeito de luz passando */
+header h1::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(120deg, transparent, rgba(255,255,255,0.8), transparent);
+    transform: skewX(-20deg);
+    animation: brilho 4s infinite;
+}
+
+@keyframes brilho {
+    0% { left: -100%; }
+    50% { left: 120%; }
+    100% { left: 120%; }
 }
 
 header p {
@@ -138,14 +158,14 @@ header p {
     box-shadow: 0 0 10px #ff1a1a;
 }
 
-/* Footer corrigido de verdade */
+/* Footer */
 footer {
     position: fixed;
     bottom: 10px;
     right: 15px;
     background: transparent;
     color: rgba(255, 255, 255, 0.25);
-    text-shadow: 0 0 5px rgba(0,0,0,0.8); /* corta o vermelho */
+    text-shadow: 0 0 5px rgba(0,0,0,0.8);
     font-size: 0.9em;
     z-index: 1000;
     pointer-events: none;
